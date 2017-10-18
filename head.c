@@ -25,7 +25,7 @@ main(int argc, char *argv[])
             case 'n':
                 nlines = atol(optarg);
                 break;
-            case 'h'
+            case 'h':
                 fprintf(stdout, "Usege: %s [-n LINES] [FILE ...]\n", argv[0]);
                 exit(0);
             case '?':
