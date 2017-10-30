@@ -565,3 +565,22 @@ server_main(int server_fd, char *docroot)
         close(sock);
     }
 }
+
+static void
+detach_children(void)
+{
+    struct sigaction act;
+
+    act.sa_handler = noop_handler;
+    sigemptyset(&act.sa_mask);
+    act.sa_flags = SA_RESTART | SA_NOCHLDWAIT;
+    if (sigaction(SIGCHLD, &act, NULL) < 0) {
+        log_exit("sigaction() failded: %s", strerror(errno));
+    }
+}
+
+static void
+noop_handler(int sig)
+{
+    ;
+}
